@@ -159,7 +159,7 @@ def YamlToXml(sOutputDir, aArgData, sEcuExtractRef)
       abort("not YAML file name !! [#{sFileName}]")
     end
 
-    hTmpData = YAML.load(File.read(sFileName).toutf8())
+    hTmpData = YAML.load(File.read(sFileName))
     # ハッシュでない(YAMLでない)場合エラー
     if (!hTmpData.is_a?(Hash))
       abort("not YAML file !! [#{sFileName}]")
