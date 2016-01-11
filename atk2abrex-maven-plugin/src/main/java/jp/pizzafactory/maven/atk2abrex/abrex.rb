@@ -102,7 +102,7 @@ XML_INSTANCE_REF_CONTAINER = {"EcucPartitionSoftwareComponentInstanceRef" =>
 ######################################################################
 # YAML → XML 実行機能
 ######################################################################
-def YamlToXml(aArgData, sEcuExtractRef)
+def YamlToXml(sOutputDir, aArgData, sEcuExtractRef)
   # 各パラメータのデータ型定義(-pオプションで生成したものを使用する)
   sFileName = "#{TOOL_ROOT}/param_info.yaml"
   if (!File.exist?(sFileName))
@@ -153,7 +153,7 @@ def YamlToXml(aArgData, sEcuExtractRef)
     # 出力ファイル名作成(複数ある場合，最初のファイル名を採用する)
     if (File.extname(sFileName) == ".yaml")
       if (sArxmlName.nil?())
-        sArxmlName = File.dirname(sFileName) + "/" + File.basename(sFileName, ".yaml") + ".arxml"
+        sArxmlName = sOutputDir + "/" + File.basename(sFileName, ".yaml") + ".arxml"
       end
     else
       abort("not YAML file name !! [#{sFileName}]")
