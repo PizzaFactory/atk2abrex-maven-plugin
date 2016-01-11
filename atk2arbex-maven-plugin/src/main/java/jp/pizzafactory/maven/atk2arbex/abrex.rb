@@ -964,70 +964,70 @@ end
 ######################################################################
 # オプション処理
 ######################################################################
-lMode = :YamlToXml
-sEcuExtractRef = nil
-cOpt = OptionParser.new(banner="Usage: abrex.rb [options]... [yaml|xml files]...", 18)
-cOpt.version = VERSION
-sOptData = nil
-sBswName = nil
-cOpt.on("-i XML_FILE", "ARXML to YAML conversion") {|xVal|
-  sOptData = xVal
-  lMode = :XmlToYaml
-}
-cOpt.on("-p XML_FILE", "Generate 'param_info.yaml' from AUTOSAR Ecu Configuration Parameters file") {|xVal|
-  sOptData = xVal
-  lMode = :MakeParamInfo
-}
-cOpt.on("-c XML_FILE", "Generate '{BSW_NAME}.csv' from AUTOSAR Ecu Configuration Parameters file") {|xVal|
-  sOptData = xVal
-  lMode = :MakeCsv
-}
-cOpt.on("-b BSW_NAME", "set a BSW Module Name (for '-c' additional optipn)") {|xVal|
-  sBswName = xVal
-  lMode = :MakeCsv
-}
-cOpt.on("-e ECU-EXTRACT-REF", "set a ECU-EXTRACT-REF path if <ECUC-VALUE-COLLECTION> is needed") {|xVal|
-  sEcuExtractRef = xVal
-  lMode = :YamlToXml
-}
-cOpt.on("-v", "--version", "show version information"){
-  puts(cOpt.ver())
-  exit(1)
-}
-cOpt.on("-h", "--help", "show help (this)"){
-  puts(cOpt.help())
-  exit(1)
-}
-
-begin
-  aArgData = cOpt.parse(ARGV)
-rescue OptionParser::ParseError
-  puts(cOpt.help())
-  exit(1)
-end
-
-if (((lMode == :YamlToXml) && aArgData.empty?()) ||
-    ((lMode != :YamlToXml) && sOptData.nil?()))
-  puts(cOpt.help())
-  exit(1)
-end
-
-if ((lMode == :MakeCsv) && sBswName.nil?())
-  puts(cOpt.help())
-  exit(1)
-end
+#lMode = :YamlToXml
+#sEcuExtractRef = nil
+#cOpt = OptionParser.new(banner="Usage: abrex.rb [options]... [yaml|xml files]...", 18)
+#cOpt.version = VERSION
+#sOptData = nil
+#sBswName = nil
+#cOpt.on("-i XML_FILE", "ARXML to YAML conversion") {|xVal|
+#  sOptData = xVal
+#  lMode = :XmlToYaml
+#}
+#cOpt.on("-p XML_FILE", "Generate 'param_info.yaml' from AUTOSAR Ecu Configuration Parameters file") {|xVal|
+#  sOptData = xVal
+#  lMode = :MakeParamInfo
+#}
+#cOpt.on("-c XML_FILE", "Generate '{BSW_NAME}.csv' from AUTOSAR Ecu Configuration Parameters file") {|xVal|
+#  sOptData = xVal
+#  lMode = :MakeCsv
+#}
+#cOpt.on("-b BSW_NAME", "set a BSW Module Name (for '-c' additional optipn)") {|xVal|
+#  sBswName = xVal
+#  lMode = :MakeCsv
+#}
+#cOpt.on("-e ECU-EXTRACT-REF", "set a ECU-EXTRACT-REF path if <ECUC-VALUE-COLLECTION> is needed") {|xVal|
+#  sEcuExtractRef = xVal
+#  lMode = :YamlToXml
+#}
+#cOpt.on("-v", "--version", "show version information"){
+#  puts(cOpt.ver())
+#  exit(1)
+#}
+#cOpt.on("-h", "--help", "show help (this)"){
+#  puts(cOpt.help())
+#  exit(1)
+#}
+#
+#begin
+#  aArgData = cOpt.parse(ARGV)
+#rescue OptionParser::ParseError
+#  puts(cOpt.help())
+#  exit(1)
+#end
+#
+#if (((lMode == :YamlToXml) && aArgData.empty?()) ||
+#    ((lMode != :YamlToXml) && sOptData.nil?()))
+#  puts(cOpt.help())
+#  exit(1)
+#end
+#
+#if ((lMode == :MakeCsv) && sBswName.nil?())
+#  puts(cOpt.help())
+#  exit(1)
+#end
 
 
 ######################################################################
 # オプションに従って各処理を実行
 ######################################################################
-case lMode
-  when :YamlToXml
-    YamlToXml(aArgData, sEcuExtractRef)
-  when :XmlToYaml
-    XmlToYaml(sOptData, aArgData)
-  when :MakeParamInfo
-    MakeParamInfo(sOptData)
-  when :MakeCsv
-    MakeCsv(sOptData, sBswName)
-end
+#case lMode
+#  when :YamlToXml
+#    YamlToXml(aArgData, sEcuExtractRef)
+#  when :XmlToYaml
+#    XmlToYaml(sOptData, aArgData)
+#  when :MakeParamInfo
+#    MakeParamInfo(sOptData)
+#  when :MakeCsv
+#    MakeCsv(sOptData, sBswName)
+#end
