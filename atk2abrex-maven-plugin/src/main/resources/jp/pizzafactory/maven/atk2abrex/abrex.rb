@@ -804,13 +804,13 @@ end
 ######################################################################
 # ジェネレータ用csvファイルの生成
 ######################################################################
-def MakeCsv(sFileName, sTargetModule)
+def MakeCsv(sOutputDir, sFileName, sTargetModule)
   # ファイルが存在しない場合エラー
   if (!File.exist?(sFileName))
     abort("Argument error !! [#{sFileName}]")
   end
 
-  sCsvFileName = File.dirname(sFileName) + "/" + sTargetModule + ".csv"
+  sCsvFileName = sOutputDir + "/" + sTargetModule + ".csv"
 
   # XMLライブラリでの読み込み
   cXmlData = REXML::Document.new(open(sFileName))

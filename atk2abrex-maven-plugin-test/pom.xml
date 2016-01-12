@@ -9,12 +9,34 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>com.googlecode.maven-download-plugin</groupId>
+				<artifactId>download-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
 				<groupId>jp.pizzafactory.maven</groupId>
 				<artifactId>atk2abrex-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>com.googlecode.maven-download-plugin</groupId>
+					<artifactId>download-maven-plugin</artifactId>
+					<version>1.2.1</version>
+					<executions>
+						<execution>
+							<id>get-ecuc-param</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>wget</goal>
+							</goals>
+							<configuration>
+								<url>http://www.autosar.org/fileadmin/files/releases/4-0/methodology-templates/templates/standard/AUTOSAR_MOD_ECUConfigurationParameters.zip</url>
+								<unpack>true</unpack>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
 				<plugin>
 					<groupId>jp.pizzafactory.maven</groupId>
 					<artifactId>atk2abrex-maven-plugin</artifactId>
@@ -42,6 +64,17 @@
 								<files>
 									<file>${basedir}/target/sample.arxml</file>
 								</files>
+							</configuration>
+						</execution>
+						<execution>
+							<id>csv generation</id>
+							<phase>generate-resources</phase>
+							<goals>
+								<goal>make-csv</goal>
+							</goals>
+							<configuration>
+								<ecuConfigurationParameters>${basedir}/target/AUTOSAR_MOD_ECUConfigurationParameters.arxml</ecuConfigurationParameters>
+								<targetModule>Com</targetModule>
 							</configuration>
 						</execution>
 					</executions>
