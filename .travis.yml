@@ -1,0 +1,4 @@
+language: java
+jdk:
+- oraclejdk8
+script: mvn -f atk2abrex-maven-plugin/pom.xml install && mvn -X -f atk2abrex-maven-plugin-test/pom.xml package
