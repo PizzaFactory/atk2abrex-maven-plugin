@@ -444,8 +444,8 @@ end
 ######################################################################
 # XML → YAML 実行機能
 ######################################################################
-def XmlToYaml(sFirstFile, aExtraFile)
-  aExtraFile.unshift(sFirstFile)
+def XmlToYaml(sOutputDir, sFirstFile, aExtraFile)
+#  aExtraFile.unshift(sFirstFile)
   aExtraFile.each{|sFileName|
     # ファイルが存在しない場合エラー
     if (!File.exist?(sFileName))
@@ -454,7 +454,7 @@ def XmlToYaml(sFirstFile, aExtraFile)
 
     # 出力ファイル名作成
     if (File.extname(sFileName) == ".arxml")
-      sYamlName = File.dirname(sFileName) + "/" + File.basename(sFileName, ".arxml") + ".yaml"
+      sYamlName = sOutputDir + "/" + File.basename(sFileName, ".arxml") + ".yaml"
     else
       abort("not ARXML file !! [#{sFileName}]")
     end

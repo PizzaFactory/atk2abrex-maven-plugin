@@ -21,6 +21,7 @@
 					<version>0.0.1-SNAPSHOT</version>
 					<executions>
 						<execution>
+							<id>arxml generation</id>
 							<phase>process-sources</phase>
 							<goals>
 								<goal>yaml-to-arxml</goal>
@@ -28,6 +29,18 @@
 							<configuration>
 								<files>
 									<file>${basedir}/src/main/resources/sample.yaml</file>
+								</files>
+							</configuration>
+						</execution>
+						<execution>
+							<id>yaml generation</id>
+							<phase>process-sources</phase>
+							<goals>
+								<goal>arxml-to-yaml</goal>
+							</goals>
+							<configuration>
+								<files>
+									<file>${basedir}/target/sample.arxml</file>
 								</files>
 							</configuration>
 						</execution>
