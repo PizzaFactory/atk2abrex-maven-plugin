@@ -17,14 +17,11 @@ package jp.pizzafactory.maven.atk2abrex;
  */
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -34,8 +31,8 @@ import org.jruby.embed.ScriptingContainer;
 
 /**
  */
-@Mojo(name = "yaml-to-arxml", defaultPhase = LifecyclePhase.PROCESS_SOURCES)
-public class YamlToArxmlMojo extends AbstractAtk2AbrexMojo {
+@Mojo(name = "arxml-to-yaml", defaultPhase = LifecyclePhase.PROCESS_SOURCES)
+public class ArxmlToYamlMojo extends AbstractAtk2AbrexMojo {
     /**
      * Base location of param_info.yaml
      */
@@ -61,43 +58,13 @@ public class YamlToArxmlMojo extends AbstractAtk2AbrexMojo {
         InputStream ist = YamlToArxmlMojo.class.getResourceAsStream("abrex.rb");
         container.runScriptlet(ist, "abrex.rb");
 
-        if (!paramInfoDir.exists()) {
-            if (!paramInfoDir.mkdirs()) {
-                throw new MojoExecutionException("Can't create paramInfoDir: "
-                        + paramInfoDir.getAbsolutePath());
-            }
-        }
-        container.put("TOOL_ROOT", paramInfoDir.getAbsolutePath());
-
-        final File paramInfo = new File(paramInfoDir, "param_info.yaml");
-        if (overwriteParamInfo) {
-            try {
-                FileOutputStream fos = new FileOutputStream(paramInfo);
-                InputStream is = YamlToArxmlMojo.class
-                        .getResourceAsStream("param_info.yaml");
-                IOUtils.copy(is, fos);
-            } catch (IOException e) {
-                throw new MojoExecutionException(
-                        "Error in writing param_info.yaml", e);
-            }
-        } else {
-            if (!paramInfo.exists()) {
-                throw new MojoExecutionException("Can't find "
-                        + paramInfo.getAbsolutePath());
-            }
-        }
-
         final String sOutputDir = outputDirectory.getAbsolutePath();
-        final List<Object> aArgData = Arrays.stream(files)
+        final List<Object> aExtraFile = Arrays.stream(files)
                 .map(s -> s.getAbsolutePath()).collect(Collectors.toList());
-        final String sEcuExtractRef;
-        if (ecuExtractRef != null) {
-            sEcuExtractRef = ecuExtractRef.getAbsolutePath();
-        } else {
-            sEcuExtractRef = null;
-        }
+        Object sFirstFile = aExtraFile.get(0);
 
-        container.callMethod(ruby.getCurrentContext(), "YamlToXml", sOutputDir,
-                aArgData, sEcuExtractRef);
+        container.callMethod(ruby.getCurrentContext(), "XmlToYaml", sOutputDir,
+                sFirstFile, aExtraFile);
     }
+
 }
