@@ -30,11 +30,4 @@ public abstract class AbstractAtk2AbrexMojo extends AbstractMojo {
      */
     @Parameter(defaultValue = "${project.build.directory}", property = "outputDir", required = true)
     protected File outputDirectory;
-
-    /**
-     * Source files.
-     */
-    @Parameter(property = "file", required = true)
-    protected File[] files;
-
 }

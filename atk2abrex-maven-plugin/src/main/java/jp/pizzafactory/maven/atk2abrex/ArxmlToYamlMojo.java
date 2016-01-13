@@ -34,6 +34,12 @@ import org.jruby.embed.ScriptingContainer;
 @Mojo(name = "arxml-to-yaml", defaultPhase = LifecyclePhase.PROCESS_SOURCES)
 public class ArxmlToYamlMojo extends AbstractAtk2AbrexMojo {
     /**
+     * Source files.
+     */
+    @Parameter(property = "file", required = true)
+    protected File[] files;
+
+    /**
      * Base location of param_info.yaml
      */
     @Parameter(defaultValue = "${project.build.directory}/atk2abrex")
