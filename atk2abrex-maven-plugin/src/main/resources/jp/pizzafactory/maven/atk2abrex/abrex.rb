@@ -571,13 +571,13 @@ end
 ######################################################################
 # AUTOSARパラメータ情報ファイル作成
 ######################################################################
-def MakeParamInfo(sFileName)
+def MakeParamInfo(sOutputDir, sFileName)
   # ファイルが存在しない場合エラー
   if (!File.exist?(sFileName))
     abort("Argument error !! [#{sFileName}]")
   end
 
-  sParamFileName = File.dirname(sFileName) + "/param_info.yaml"
+  sParamFileName = sOutputDir + "/param_info.yaml"
 
   # 読み込み対象モジュール
   aTargetModule = ["Rte", "Os", "Com", "PduR", "CanIf", "Can", "EcuC", "EcuM", "WdgM", "WdgIf", "Wdg", "Dem"]
