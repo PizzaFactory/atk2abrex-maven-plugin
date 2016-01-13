@@ -77,6 +77,16 @@
 								<targetModule>Com</targetModule>
 							</configuration>
 						</execution>
+						<execution>
+							<id>ParamInfo generation</id>
+							<phase>generate-resources</phase>
+							<goals>
+								<goal>make-paraminfo</goal>
+							</goals>
+							<configuration>
+								<ecuConfigurationParameters>${basedir}/target/AUTOSAR_MOD_ECUConfigurationParameters.arxml</ecuConfigurationParameters>
+							</configuration>
+						</execution>
 					</executions>
 				</plugin>
 			</plugins>
